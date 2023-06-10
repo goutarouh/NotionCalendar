@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import com.github.goutarouh.notioncalendar.util.animateScrollToCenterItem
+import com.github.goutarouh.notioncalendar.util.toPx
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -45,7 +46,8 @@ fun CalendarViewPager(
         }
     }
 
+    val tabWidthPx = TAB_WIDTH.toPx()
     LaunchedEffect(pageState.currentPage) {
-        lazyListState.animateScrollToCenterItem(pageState.currentPage)
+        lazyListState.animateScrollToCenterItem(pageState.currentPage, tabWidthPx.toInt())
     }
 }
