@@ -14,19 +14,7 @@ suspend fun LazyListState.animateScrollToCenterItem(index: Int, itemWidth: Int) 
     animateScrollToItem(index, -listCenterPosition + itemWidth / 2)
 }
 
-@Composable
-fun LazyListState.OnAppearLastItem(onAppearLastItem: (Int) -> Unit) {
-    val isReachedToEnd by remember {
-        derivedStateOf {
-            layoutInfo.visibleItemsInfo.size < layoutInfo.totalItemsCount &&
-                    layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
-        }
-    }
-    LaunchedEffect(Unit) {
-        snapshotFlow { isReachedToEnd }
-            .filter { it }
-            .collect {
-                onAppearLastItem(layoutInfo.totalItemsCount-2)
-            }
-    }
+suspend fun LazyListState.scrollToCenterItem(index: Int, itemWidth: Int) {
+    val listCenterPosition = layoutInfo.viewportSize.width / 2
+    scrollToItem(index, -listCenterPosition + itemWidth / 2)
 }

@@ -8,6 +8,9 @@ object LocalDateUtil {
     val localDateFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("M/d")
 }
 
+fun LocalDate.generateAroundDateList(): List<LocalDate> {
+    return List(21) { this.minusDays(10).plusDays(it.toLong()) }
+}
 
 fun datesInMonth(date: LocalDate): List<LocalDate> {
     val start = date.withDayOfMonth(1)

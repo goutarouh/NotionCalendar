@@ -1,5 +1,6 @@
 package com.github.goutarouh.notioncalendar.ui
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -12,7 +13,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.github.goutarouh.notioncalendar.util.animateScrollToCenterItem
-import com.github.goutarouh.notioncalendar.util.datesInMonth
+import com.github.goutarouh.notioncalendar.util.generateAroundDateList
+import com.github.goutarouh.notioncalendar.util.scrollToCenterItem
 import com.github.goutarouh.notioncalendar.util.toPx
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -25,7 +27,8 @@ fun CalendarViewPager(
 ) {
     val scope = rememberCoroutineScope()
     val dates = remember {
-        mutableStateOf(datesInMonth(initialDate))
+        val items = initialDate.generateAroundDateList()
+        mutableStateOf(items)
     }
     val pageState = rememberPagerState(
         initialPage = dates.value.indexOf(initialDate)
@@ -61,6 +64,24 @@ fun CalendarViewPager(
     }
 
     LaunchedEffect(Unit) {
-        lazyListState.animateScrollToCenterItem(dates.value.indexOf(initialDate), tabWidthPx.toInt())
+        lazyListState.scrollToCenterItem(dates.value.indexOf(initialDate), tabWidthPx.toInt())
+    }
+
+    LaunchedEffect(pageState.settledPage) {
+        val settlePage = pageState.settledPage
+        if (settlePage == 3) {
+            val current = dates.value[pageState.settledPage]
+            val items = current.generateAroundDateList()
+            dates.value = items
+            lazyListState.scrollToCenterItem(dates.value.indexOf(current), tabWidthPx.toInt())
+            pageState.scrollToPage(items.indexOf(current))
+        }
+        if (settlePage == dates.value.lastIndex - 3) {
+            val current = dates.value[pageState.settledPage]
+            val items = current.generateAroundDateList()
+            dates.value = items
+            lazyListState.scrollToCenterItem(dates.value.indexOf(current), tabWidthPx.toInt())
+            pageState.scrollToPage(items.indexOf(current))
+        }
     }
 }
