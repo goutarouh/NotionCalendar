@@ -24,6 +24,7 @@ fun CalendarViewPager(
     )
     Column {
         DateTabLayout(
+            currentIndex = pageState.currentPage,
             initialDate = initialDate,
             lazyListState = lazyListState,
             onClicked = {
