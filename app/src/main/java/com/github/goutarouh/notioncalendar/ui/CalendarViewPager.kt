@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.github.goutarouh.notioncalendar.util.animateScrollToCenterItem
+import com.github.goutarouh.notioncalendar.util.datesInMonth
 import com.github.goutarouh.notioncalendar.util.toPx
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -21,22 +22,21 @@ import java.time.LocalDate
 fun CalendarViewPager(
     modifier: Modifier = Modifier,
     initialDate: LocalDate = LocalDate.now(),
-    dates: List<LocalDate> = List(21) { initialDate.minusDays(10).plusDays(it.toLong()) }
 ) {
     val scope = rememberCoroutineScope()
-    val lazyListState = rememberLazyListState()
-    val pageState = rememberPagerState(
-        initialPage = 10
-    )
-    val mDates = remember {
-        mutableStateOf(dates)
+    val dates = remember {
+        mutableStateOf(datesInMonth(initialDate))
     }
+    val pageState = rememberPagerState(
+        initialPage = dates.value.indexOf(initialDate)
+    )
+    val lazyListState = rememberLazyListState()
     Column(
         modifier = modifier
     ) {
         DateTabLayout(
             currentIndex = pageState.currentPage,
-            dates = mDates.value,
+            dates = dates.value,
             lazyListState = lazyListState,
             onClicked = {
                 scope.launch {
@@ -45,12 +45,12 @@ fun CalendarViewPager(
             }
         )
         HorizontalPager(
-            pageCount = dates.size,
+            pageCount = dates.value.size,
             state = pageState,
         ) { page ->
             NotionPage(
                 page = page,
-                date = dates[page]
+                date = dates.value[page]
             )
         }
     }
@@ -61,6 +61,6 @@ fun CalendarViewPager(
     }
 
     LaunchedEffect(Unit) {
-        lazyListState.animateScrollToCenterItem(dates.indexOf(initialDate), tabWidthPx.toInt())
+        lazyListState.animateScrollToCenterItem(dates.value.indexOf(initialDate), tabWidthPx.toInt())
     }
 }
