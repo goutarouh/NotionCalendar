@@ -8,6 +8,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import com.github.goutarouh.notioncalendar.util.animateScrollToCenterItem
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -29,7 +30,6 @@ fun CalendarViewPager(
             lazyListState = lazyListState,
             onClicked = {
                 scope.launch {
-                    lazyListState.animateScrollToItem(it)
                     pageState.scrollToPage(it)
                 }
             }
@@ -46,6 +46,6 @@ fun CalendarViewPager(
     }
 
     LaunchedEffect(pageState.currentPage) {
-        lazyListState.animateScrollToItem(pageState.currentPage)
+        lazyListState.animateScrollToCenterItem(pageState.currentPage)
     }
 }
