@@ -9,23 +9,20 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.goutarouh.notioncalendar.util.LocalDateUtil
-import com.github.goutarouh.notioncalendar.util.toDp
 import java.time.LocalDate
 
 @Composable
 fun DateTabLayout(
     currentIndex: Int,
-    initialDate: LocalDate,
+    dates: List<LocalDate>,
     lazyListState: LazyListState,
     onClicked: (Int) -> Unit,
 ) {
-    val dates = List(21) { initialDate.minusDays(10).plusDays(it.toLong()) }
     LazyRow(
         state = lazyListState
     ) {
@@ -37,10 +34,6 @@ fun DateTabLayout(
                 onClicked = { onClicked(it) }
             )
         }
-    }
-
-    LaunchedEffect(Unit) {
-        lazyListState.scrollToItem(10)
     }
 }
 
