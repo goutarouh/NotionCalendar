@@ -9,7 +9,8 @@ object LocalDateUtil {
 }
 
 fun LocalDate.generateAroundDateList(): List<LocalDate> {
-    return List(21) { this.minusDays(10).plusDays(it.toLong()) }
+    val length = 100000
+    return List(length) { this.minusDays(length/2L).plusDays(it.toLong()) }
 }
 
 fun datesInMonth(date: LocalDate): List<LocalDate> {

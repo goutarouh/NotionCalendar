@@ -1,6 +1,5 @@
 package com.github.goutarouh.notioncalendar.ui
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -65,23 +64,5 @@ fun CalendarViewPager(
 
     LaunchedEffect(Unit) {
         lazyListState.scrollToCenterItem(dates.value.indexOf(initialDate), tabWidthPx.toInt())
-    }
-
-    LaunchedEffect(pageState.settledPage) {
-        val settlePage = pageState.settledPage
-        if (settlePage == 3) {
-            val current = dates.value[pageState.settledPage]
-            val items = current.generateAroundDateList()
-            dates.value = items
-            lazyListState.scrollToCenterItem(dates.value.indexOf(current), tabWidthPx.toInt())
-            pageState.scrollToPage(items.indexOf(current))
-        }
-        if (settlePage == dates.value.lastIndex - 3) {
-            val current = dates.value[pageState.settledPage]
-            val items = current.generateAroundDateList()
-            dates.value = items
-            lazyListState.scrollToCenterItem(dates.value.indexOf(current), tabWidthPx.toInt())
-            pageState.scrollToPage(items.indexOf(current))
-        }
     }
 }
