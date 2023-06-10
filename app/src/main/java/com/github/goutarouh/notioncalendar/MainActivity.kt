@@ -41,7 +41,10 @@ class MainActivity : ComponentActivity() {
                         content = { paddingValues ->
                             CalendarViewPager(
                                 modifier = Modifier.padding(paddingValues),
-                                initialDate = currentSelectedDate
+                                initialDate = currentSelectedDate,
+                                setDate = {
+                                    currentSelectedDate = it
+                                }
                             )
                         }
                     )

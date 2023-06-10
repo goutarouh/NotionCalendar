@@ -23,6 +23,7 @@ import java.time.LocalDate
 fun CalendarViewPager(
     modifier: Modifier = Modifier,
     initialDate: LocalDate,
+    setDate: (LocalDate) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val dates = remember {
@@ -60,6 +61,8 @@ fun CalendarViewPager(
     val tabWidthPx = TAB_WIDTH.toPx()
     LaunchedEffect(pageState.currentPage) {
         lazyListState.animateScrollToCenterItem(pageState.currentPage, tabWidthPx.toInt())
+        val currentDate = dates.value[pageState.currentPage]
+        setDate(currentDate)
     }
 
     LaunchedEffect(initialDate) {

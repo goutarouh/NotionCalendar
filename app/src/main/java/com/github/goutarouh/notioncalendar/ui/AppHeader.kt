@@ -22,9 +22,12 @@ fun AppHeader(
             Text(text = title)
         },
         actions = {
+            Text(
+                text = currentDate.year.toString()
+            )
             IconButton(
                 onClick = {
-                    setDate(LocalDate.of(2023, 4, 3))
+                    setDate(LocalDate.of(2022, 4, 3))
                 }
             ) {
                 Icon(
