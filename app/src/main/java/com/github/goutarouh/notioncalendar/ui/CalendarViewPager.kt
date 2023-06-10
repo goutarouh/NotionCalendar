@@ -8,6 +8,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import com.github.goutarouh.notioncalendar.util.animateScrollToCenterItem
 import com.github.goutarouh.notioncalendar.util.toPx
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ import java.time.LocalDate
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CalendarViewPager(
-    initialDate: LocalDate = LocalDate.now()
+    modifier: Modifier = Modifier,
+    initialDate: LocalDate = LocalDate.now(),
 ) {
     val scope = rememberCoroutineScope()
     val lazyListState = rememberLazyListState()
@@ -24,7 +26,9 @@ fun CalendarViewPager(
     val pageState = rememberPagerState(
         initialPage = 10
     )
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         DateTabLayout(
             currentIndex = pageState.currentPage,
             initialDate = initialDate,
