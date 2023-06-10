@@ -8,15 +8,15 @@ object LocalDateUtil {
     val localDateFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("M/d")
 }
 
-fun LocalDate.generateAroundDateList(): List<LocalDate> {
-    val length = 100000
-    return List(length) { this.minusDays(length/2L).plusDays(it.toLong()) }
+fun LocalDate.toEpochSecond(): Long {
+    return this.toEpochDay() * 24 * 60 * 60 * 1000
 }
 
-fun datesInMonth(date: LocalDate): List<LocalDate> {
-    val start = date.withDayOfMonth(1)
-    val end = YearMonth.from(date).atEndOfMonth()
-    return generateSequence(start) { it.plusDays(1) }
-        .takeWhile { !it.isAfter(end) }
-        .toList()
+fun Long.toLocalDate(): LocalDate {
+    return LocalDate.ofEpochDay(this / 24 / 60 / 60 / 1000)
+}
+
+fun LocalDate.generateAroundDateList(): List<LocalDate> {
+    val length = 100000
+    return List(length) { this.minusDays(length / 2L).plusDays(it.toLong()) }
 }
