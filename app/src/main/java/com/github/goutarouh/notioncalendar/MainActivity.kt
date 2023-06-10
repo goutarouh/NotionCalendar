@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.window.Dialog
 import com.github.goutarouh.notioncalendar.ui.AppHeader
 import com.github.goutarouh.notioncalendar.ui.CalendarViewPager
 import com.github.goutarouh.notioncalendar.ui.theme.NotionCalendarTheme
@@ -63,12 +64,12 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                             if (onDatePicker) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(Color.White)
-                                ) {
-                                    DatePicker(datePickerState = datePickerState)
+                                Dialog(onDismissRequest = {
+                                    onDatePicker = false
+                                }) {
+                                    Box(modifier = Modifier.background(Color.White)) {
+                                        DatePicker(datePickerState = datePickerState)
+                                    }
                                 }
                             }
                         }
