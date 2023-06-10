@@ -8,11 +8,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppHeader(
-    title: String
+    title: String,
+    currentDate: LocalDate,
+    setDate: (LocalDate) -> Unit
 ) {
     TopAppBar(
         title = {
@@ -20,7 +23,9 @@ fun AppHeader(
         },
         actions = {
             IconButton(
-                onClick = {}
+                onClick = {
+                    setDate(LocalDate.of(2023, 4, 3))
+                }
             ) {
                 Icon(
                     imageVector = Icons.Default.DateRange,
