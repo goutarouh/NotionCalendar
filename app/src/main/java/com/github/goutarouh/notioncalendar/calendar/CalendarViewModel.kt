@@ -1,7 +1,12 @@
 package com.github.goutarouh.notioncalendar.calendar
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CalendarViewModel: ViewModel() {
+@HiltViewModel
+class CalendarViewModel @Inject constructor(
+
+) : ViewModel() {
 
 }
