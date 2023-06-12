@@ -14,11 +14,6 @@ class CalendarViewModel @Inject constructor(
 
     fun getDatabase() {
         viewModelScope.launch {
-            val database = try {
-                notionRepository.getDatabase()
-            } catch (e: Exception) {
-                return@launch
-            }
         }
     }
 }
