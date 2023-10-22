@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.github.goutarouh.notioncalendar"
-        minSdk = 28
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -82,4 +82,6 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
 }

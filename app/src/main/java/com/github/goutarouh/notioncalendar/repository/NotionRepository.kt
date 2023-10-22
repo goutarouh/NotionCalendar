@@ -4,7 +4,7 @@ import com.github.goutarouh.notioncalendar.repository.data.NotionApiService
 import com.github.goutarouh.notioncalendar.repository.model.NotionDatabase
 import com.github.goutarouh.notioncalendar.repository.model.NotionDatabaseQuery
 import com.github.goutarouh.notioncalendar.repository.model.NotionDatabaseQueryPostBody
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 
 class NotionRepository(
     private val notionApiService: NotionApiService

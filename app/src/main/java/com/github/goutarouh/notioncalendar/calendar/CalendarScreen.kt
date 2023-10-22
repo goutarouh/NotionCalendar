@@ -21,7 +21,7 @@ import com.github.goutarouh.notioncalendar.ui.AppHeader
 import com.github.goutarouh.notioncalendar.ui.CalendarViewPager
 import com.github.goutarouh.notioncalendar.util.toEpochSecond
 import com.github.goutarouh.notioncalendar.util.toLocalDate
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

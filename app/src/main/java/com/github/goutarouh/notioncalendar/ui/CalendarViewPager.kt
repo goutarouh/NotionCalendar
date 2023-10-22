@@ -16,7 +16,7 @@ import com.github.goutarouh.notioncalendar.util.generateAroundDateList
 import com.github.goutarouh.notioncalendar.util.scrollToCenterItem
 import com.github.goutarouh.notioncalendar.util.toPx
 import kotlinx.coroutines.launch
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

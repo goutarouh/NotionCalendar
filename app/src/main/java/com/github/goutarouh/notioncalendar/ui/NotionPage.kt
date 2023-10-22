@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.github.goutarouh.notioncalendar.util.LocalDateUtil
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 
 @Composable
 fun NotionPage(
